@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class Board {
     // Declaring Variables
-    private JPanel gui = new JPanel(new BorderLayout(3, 3));
+    private JPanel gui = new JPanel(new BorderLayout());
     private JPanel chessBoard;
     private JButton[][] chessBoardSquares = new JButton[8][8];
 
@@ -22,6 +22,7 @@ public class Board {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
                 JButton chessSquare = new JButton();
                 chessSquare.setMargin(chessSquaresMargin);
+                chessSquare.setPreferredSize(new Dimension(64, 64));
                 if ((col % 2 == 1 && row % 2 == 1) || (col % 2 == 0 && row % 2 == 0)) {
                     chessSquare.setBackground(Color.WHITE);
                     chessSquare.setOpaque(true);
