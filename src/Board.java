@@ -21,12 +21,17 @@ public class Board
         {
             board [6][i] = new Square (6, i ,new Pawn(false) );
         }
+    }
 
+    public Square[][] getBoard()
+    {
+        return board;
     }
 
     public static void main (String[] args)
     {
         Board b1 = new Board();
-        System.out.println(Arrays.deepToString(board));
+        //System.out.println(Arrays.deepToString(board));
     }
+
 }

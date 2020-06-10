@@ -16,8 +16,8 @@ public class King extends Piece
 
     @Override
     public boolean canMove(Board board, Square start, Square end) {
-        //if piece on the end Square is the same color as the current
-        if (end.getPiece() != null && start.getPiece().isWhite() == end.getPiece().isWhite())
+
+        if (!super.canMove(board, start, end))
             return false;
 
         //ensure it can move legally (diagonal or straight one square)
@@ -28,10 +28,13 @@ public class King extends Piece
         if (x_distance > 1)
             return false;
 
+
         //direction??
         //moving straight (rook)
         //moving diagonally (bishop)
-
+        //moving into a check
+        //have a different way for king movements in the move or actual game class??
+        //castle move - ADD
 
         return true;
     }

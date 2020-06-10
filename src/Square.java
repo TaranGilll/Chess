@@ -1,9 +1,11 @@
 public class Square
 {
+    //Instance Variables - final??
     private int x;
     private int y;
     private Piece piece;
 
+    //constructor to initialize the instance variables
     public Square (int x_coordinate, int y_coordinate, Piece initPiece)
     {
         x = x_coordinate;

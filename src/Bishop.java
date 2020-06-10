@@ -8,8 +8,7 @@ public class Bishop extends Piece
     @Override
     public boolean canMove(Board board, Square start, Square end)
     {
-        //if piece on the end Square is the same color as the current
-        if (end.getPiece() != null && start.getPiece().isWhite() == end.getPiece().isWhite())
+        if (!super.canMove(board, start, end))
             return false;
 
         //ensure bishop moves legally

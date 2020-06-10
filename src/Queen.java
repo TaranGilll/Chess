@@ -10,8 +10,7 @@ public class Queen extends Piece
     @Override
     public boolean canMove(Board board, Square start, Square end)
     {
-        //if piece on the end Square is the same color as the current
-        if (end.getPiece() != null && start.getPiece().isWhite() == end.getPiece().isWhite())
+        if (!super.canMove(board, start, end))
             return false;
 
         //check if Queen can move legally (diagonal and in a straight line)
@@ -20,10 +19,9 @@ public class Queen extends Piece
         if ((x_distance != y_distance) || (start.getX() != end.getX() && start.getY() != end.getY()))
             return false;
 
+
         //moving straight (rook)
-
         //moving diagonally (bishop)
-
 
         return true;
     }
