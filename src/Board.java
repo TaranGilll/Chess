@@ -32,7 +32,6 @@ public class Board
     {
         Board b1 = new Board();
         //System.out.println(Arrays.deepToString(board));
-        //
     }
 
 }
