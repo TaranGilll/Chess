@@ -157,7 +157,7 @@ public class Board implements ActionListener{
                 chessBoardSquares[2][0].setBorder(null);
                 chessBoardSquares[2][0].setBackground(new java.awt.Color(255, 206, 110));
             }
-            else if(chessBoardSquares[3][0].getModel().isPressed()) {
+            else if(e.getSource() == chessBoardSquares[3][0]) {
                 chessBoardSquares[1][0].setIcon(null);
                 chessBoardSquares[1][0].setBorder(null);
                 chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
