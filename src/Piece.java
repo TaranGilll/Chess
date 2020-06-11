@@ -27,7 +27,7 @@ public abstract class Piece
 
     //determine if the piece can make a legal move
     //pieces cannot move if they compromise a check!! - ADD ALL
-    public boolean canMove(Board board, Square start, Square end)
+    public boolean canMove(Board2 board2, Square start, Square end)
     {
         //if piece on the end Square is the same color as the current
         if (end.getPiece() != null && start.getPiece().isWhite() == end.getPiece().isWhite())

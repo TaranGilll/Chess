@@ -8,9 +8,9 @@ public class Queen extends Piece
     }
 
     @Override
-    public boolean canMove(Board board, Square start, Square end)
+    public boolean canMove(Board2 board2, Square start, Square end)
     {
-        if (!super.canMove(board, start, end))
+        if (!super.canMove(board2, start, end))
             return false;
 
         //check if Queen can move legally (diagonal and in a straight line)

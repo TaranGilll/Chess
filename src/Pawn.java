@@ -8,9 +8,9 @@ public class Pawn extends Piece
     }
 
     @Override
-    public boolean canMove(Board board, Square start, Square end)
+    public boolean canMove(Board2 board2, Square start, Square end)
     {
-        if (!super.canMove(board, start, end))
+        if (!super.canMove(board2, start, end))
             return false;
 
         //Ensure legal movement depending on current location
@@ -36,12 +36,12 @@ public class Pawn extends Piece
             //also makes sure pawn doesn't jump over a piece - CHECK
             if (start.getPiece().isWhite() && start.getY() != 1)
             {
-                if (board.getBoard()[start.getY() + 1][start.getX()].getPiece() != null)
+                if (board2.getBoard()[start.getY() + 1][start.getX()].getPiece() != null)
                     return false;
             }
             else if (!start.getPiece().isWhite() && start.getY() != 6)
             {
-                if (board.getBoard()[start.getY() - 1][start.getX()].getPiece() != null)
+                if (board2.getBoard()[start.getY() - 1][start.getX()].getPiece() != null)
                     return false;
             }
         }

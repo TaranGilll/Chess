@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Move extends Board {
+public class Move extends Board2 {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == chessBoardSquares[1][0]) {

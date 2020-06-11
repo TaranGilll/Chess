@@ -6,9 +6,9 @@ public class Bishop extends Piece
     }
 
     @Override
-    public boolean canMove(Board board, Square start, Square end)
+    public boolean canMove(Board2 board2, Square start, Square end)
     {
-        if (!super.canMove(board, start, end))
+        if (!super.canMove(board2, start, end))
             return false;
 
         //ensure bishop moves legally
@@ -32,22 +32,22 @@ public class Bishop extends Piece
         {
             if (direction.equals("nw"))
             {
-                if (board.getBoard()[start.getY() - i][start.getX() - i].getPiece() != null)
+                if (board2.getBoard()[start.getY() - i][start.getX() - i].getPiece() != null)
                     return false;
             }
             else if (direction.equals("sw"))
             {
-                if (board.getBoard()[start.getY() + i][start.getX() - i].getPiece() != null)
+                if (board2.getBoard()[start.getY() + i][start.getX() - i].getPiece() != null)
                     return false;
             }
             else if (direction.equals("ne"))
             {
-                if (board.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
+                if (board2.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
                     return false;
             }
             else if (direction.equals("se"))
             {
-                if (board.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
+                if (board2.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
                     return false;
             }
         }

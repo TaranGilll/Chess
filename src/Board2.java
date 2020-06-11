@@ -1,10 +1,8 @@
-import java.util.Arrays;
-
-public class Board
+public class Board2
 {
     private static Square[][] board;
 
-    public Board()
+    public Board2()
     {
         initializeBoard();
     }
@@ -30,7 +28,7 @@ public class Board
 
     public static void main (String[] args)
     {
-        Board b1 = new Board();
+        Board2 b1 = new Board2();
         //System.out.println(Arrays.deepToString(board));
     }
 

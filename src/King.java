@@ -15,9 +15,9 @@ public class King extends Piece
     public boolean isCastled() { return castled; }
 
     @Override
-    public boolean canMove(Board board, Square start, Square end) {
+    public boolean canMove(Board2 board2, Square start, Square end) {
 
-        if (!super.canMove(board, start, end))
+        if (!super.canMove(board2, start, end))
             return false;
 
         //ensure it can move legally (diagonal or straight one square)

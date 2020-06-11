@@ -7,9 +7,9 @@ public class Rook extends Piece
     }
 
     @Override
-    public boolean canMove(Board board, Square start, Square end) {
+    public boolean canMove(Board2 board2, Square start, Square end) {
 
-        if (!super.canMove(board, start, end))
+        if (!super.canMove(board2, start, end))
             return false;
 
         //ensure rook moves legally (only in a straight line)
@@ -34,7 +34,7 @@ public class Rook extends Piece
             {
                 for (int i = start.getX() + 1; i < end.getX(); i++)
                 {
-                    if (board.getBoard()[start.getY()][i].getPiece() != null)
+                    if (board2.getBoard()[start.getY()][i].getPiece() != null)
                         return false;
                 }
             }
@@ -42,7 +42,7 @@ public class Rook extends Piece
                 {
                 for (int i = start.getX() - 1; i > end.getX(); i--)
                 {
-                    if (board.getBoard()[start.getY()][i].getPiece() != null)
+                    if (board2.getBoard()[start.getY()][i].getPiece() != null)
                         return false;
                 }
             }
@@ -53,7 +53,7 @@ public class Rook extends Piece
             {
                 for (int i = start.getY() + 1; i < end.getY(); i++)
                 {
-                    if (board.getBoard()[i][start.getX()].getPiece() != null)
+                    if (board2.getBoard()[i][start.getX()].getPiece() != null)
                         return false;
                 }
             }
@@ -62,7 +62,7 @@ public class Rook extends Piece
                 // CHECK - no (>=)
                 for (int i = start.getY() - 1; i > end.getY(); i--)
                 {
-                    if (board.getBoard()[i][start.getX()].getPiece() != null)
+                    if (board2.getBoard()[i][start.getX()].getPiece() != null)
                         return false;
                 }
             }
