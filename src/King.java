@@ -37,5 +37,6 @@ public class King extends Piece
         //castle move - ADD
 
         return true;
+        //
     }
 }
