@@ -144,23 +144,30 @@ public class Board implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == chessBoardSquares[1][0]) {
-            ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
-            if(chessBoardSquares[2][0].getModel().isPressed()) {
-                chessBoardSquares[1][0].setIcon(null);
-                chessBoardSquares[1][0].setBorder(null);
-                chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
-                chessBoardSquares[2][0].setIcon(icon);
-                chessBoardSquares[2][0].setBorder(null);
-                chessBoardSquares[2][0].setBackground(new java.awt.Color(255, 206, 110));
-            }
-            else if(e.getSource() == chessBoardSquares[3][0]) {
-                chessBoardSquares[1][0].setIcon(null);
-                chessBoardSquares[1][0].setBorder(null);
-                chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
-                chessBoardSquares[3][0].setIcon(icon);
-                chessBoardSquares[3][0].setBorder(null);
-                chessBoardSquares[3][0].setBackground(new java.awt.Color(137, 72, 0));
-            }
+            chessBoardSquares[2][0].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
+                    chessBoardSquares[1][0].setIcon(null);
+                    chessBoardSquares[1][0].setBorder(null);
+                    chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
+                    chessBoardSquares[2][0].setIcon(icon);
+                    chessBoardSquares[2][0].setBorder(null);
+                    chessBoardSquares[2][0].setBackground(new java.awt.Color(255, 206, 110));
+                }
+            });
+            chessBoardSquares[3][0].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
+                    chessBoardSquares[1][0].setIcon(null);
+                    chessBoardSquares[1][0].setBorder(null);
+                    chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
+                    chessBoardSquares[3][0].setIcon(icon);
+                    chessBoardSquares[3][0].setBorder(null);
+                    chessBoardSquares[3][0].setBackground(new java.awt.Color(137, 72, 0));
+                }
+            });
         }
     }
 
