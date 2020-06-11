@@ -149,7 +149,7 @@ public class Board implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == chessBoardSquares[1][0]) {
             ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
-            if(e.getSource() == chessBoardSquares[2][0]) {
+            if(chessBoardSquares[2][0].getModel().isPressed()) {
                 chessBoardSquares[1][0].setIcon(null);
                 chessBoardSquares[1][0].setBorder(null);
                 chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
