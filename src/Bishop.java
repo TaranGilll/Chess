@@ -50,7 +50,7 @@ public class Bishop extends Piece
                 if (board2.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
                     return false;
             }
-        }
+        }//
         return true;
     }
 }

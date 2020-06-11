@@ -31,5 +31,5 @@ public class Board2
         Board2 b1 = new Board2();
         //System.out.println(Arrays.deepToString(board));
     }
-
+    //
 }
