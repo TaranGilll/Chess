@@ -1,14 +1,16 @@
+import javax.swing.*;
+
 import static java.lang.Math.*;
 
-public class Pawn extends Piece
-{
-    public Pawn (boolean whiteColor)
-    {
+public class Pawn extends Piece {
+    public Pawn(boolean whiteColor) {
         super(whiteColor);
     }
 
+
+/*
     @Override
-    public boolean canMove(Board2 board2, Square start, Square end)
+    public boolean canMove(JComponent button)
     {
         if (!super.canMove(board2, start, end))
             return false;
@@ -50,5 +52,9 @@ public class Pawn extends Piece
 
         return true;
     }
-    //
+ */
+    public static boolean canMove(JButton button, int x1, int x2, int y1, int y2)
+    {
+        return true;
+    }
 }

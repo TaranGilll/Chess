@@ -1,4 +1,4 @@
-public class Rook extends Piece
+/*public class Rook extends Piece
 {
 
     public Rook (boolean whiteColor)
@@ -70,5 +70,5 @@ public class Rook extends Piece
 
         return true;
     }
-
 }
+*/

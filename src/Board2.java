@@ -1,4 +1,4 @@
-public class Board2
+/*public class Board2
 {
     private static Square[][] board;
 
@@ -31,5 +31,5 @@ public class Board2
         Board2 b1 = new Board2();
         //System.out.println(Arrays.deepToString(board));
     }
-    //
 }
+ */

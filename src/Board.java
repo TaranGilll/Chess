@@ -2,15 +2,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.sql.*;
+import java.util.List;
 
 
-public class Board implements ActionListener{
+public class Board implements ActionListener {
     // Declaring Variables
+    private static JFrame frame;
     private JPanel chessBoard = new JPanel(new GridLayout(0, 8));
     protected JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton chessSquare;
-
+    private List<String> pieceNames;
+    
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
         Insets chessSquaresMargin = new Insets(0,0,0,0);
@@ -143,8 +145,56 @@ public class Board implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == chessBoardSquares[1][0]) {
-            chessBoardSquares[2][0].addActionListener(new ActionListener() {
+        // Public variables or protected so Piece class can access them (initRow1 == first coordinate person enters)
+        // Another for loop to find what other button was clicked (initRow2 == second coordinate person enteres)
+        // To determine if piece is on board (.getIcon(null) == then proceed otherwise you don't)
+        // White piece and you press on a black piece proceed (.getIcon(blackKing)
+
+        int initRow = 0;
+        int initCol = 0;
+        String description = "";
+        String color = "";
+        String piece = "";
+        JButton button = null;
+        for (int row = 0; row < chessBoardSquares.length; row++) {
+            for (int col = 0; col < chessBoardSquares[row].length; col++) {
+                if (e.getSource() == chessBoardSquares[row][col]) {
+                    initRow = row;
+                    initCol = col;
+                    button = chessBoardSquares[row][col];
+                    if (button.getIcon() != null)
+                        description = ((ImageIcon) button.getIcon()).getDescription();
+                        System.out.println(description);
+                    if (description.lastIndexOf("Pawn") != -1 && description.contains("white")) {
+                        color = "white";
+                        piece = "pawn";
+                    }
+                    //System.out.println(desc);
+                    JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getIcon()); } }
+        }
+
+        int initRow2 = 0;
+        int initCol2 = 0;
+        JButton button2 = null;
+        for (int row = 0; row < chessBoardSquares.length; row++) {
+            for (int col = 0; col < chessBoardSquares[row].length; col++) {
+                if (e.getSource() == chessBoardSquares[row][col]) {
+                    initRow2 = row;
+                    initCol2 = col;
+                    button2 = chessBoardSquares[row][col]; } }
+        }
+        boolean condition = Piece.canMove(button2, initRow, initCol, initRow2, initRow2);
+        if (condition) {
+            button.setIcon(null);
+            button.setBorder(null);
+            button.setBackground(new java.awt.Color(137, 72, 0));
+            button2.setIcon(button.getIcon());
+            button2.setBorder(null);
+            button2.setBackground(new java.awt.Color(137, 72, 0));
+        }
+    }
+
+            /*chessBoardSquares[2][0].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
@@ -168,15 +218,14 @@ public class Board implements ActionListener{
                     chessBoardSquares[3][0].setBackground(new java.awt.Color(137, 72, 0));
                 }
             });
-        }
-    }
+        }*/
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Board");
+        frame = new JFrame("Board");
         frame.add(new Board().chessBoard);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.pack();
     }
-    //
 }
+

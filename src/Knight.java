@@ -1,3 +1,5 @@
+import javax.swing.*;
+/*
 public class Knight extends Piece
 {
     public Knight(boolean whiteColor) {
@@ -15,5 +17,5 @@ public class Knight extends Piece
         int y_direction = Math.abs(start.getY() - end.getY());
         return (x_direction * y_direction == 2);
     }
-    //
 }
+ */
