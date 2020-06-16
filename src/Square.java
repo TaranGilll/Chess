@@ -1,6 +1,6 @@
-/*public class Square
+public class Square
 {
-    //Instance Variables - final??
+    //Instance Variables
     private int x;
     private int y;
     private Piece piece;
@@ -27,4 +27,4 @@
         return piece;
     }
 }
-*/
+

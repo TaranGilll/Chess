@@ -158,32 +158,36 @@ public class Board implements ActionListener {
         JButton button2 = null;
 
         // FIRST LOOP - first button is clicked
+        label:
         for (int row = 0; row < chessBoardSquares.length; row ++) {
             for(int col = 0; col <chessBoardSquares[row].length; col ++) {
                 if(e.getSource() == chessBoardSquares[row][col]) {
                     button1 = null;
                     button1 = chessBoardSquares[row][col];
-                    description = ((ImageIcon) button1.getIcon()).getDescription();
+                    if(button1.getIcon() != null)
+                        description = ((ImageIcon) button1.getIcon()).getDescription();
                     JOptionPane.showMessageDialog(null, "first button");
                     if (description.lastIndexOf("Pawn") != -1 && description.contains("white")) {
                         color = "white";
                         piece = "pawn";
                     }
+                    System.out.println("Works");
+                    break label;
                 }
-
             }
         }
 
         // SECOND LOOP
         try
         {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         }
         catch(InterruptedException ex)
         {
             Thread.currentThread().interrupt();
         }
 
+        //label2;
         for (int row = 0; row < chessBoardSquares.length; row++) {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
                 if (e.getSource() == chessBoardSquares[row][col]) {
@@ -194,17 +198,20 @@ public class Board implements ActionListener {
                     if (Piece.canMove(button2)) {
                         //If Button2 has no icon on it
                         ImageIcon icon = (ImageIcon) button1.getIcon();
+                        //ImageIcon whitePawn = new ImageIcon(getClass().getResource("whitePawn.png"));
                         button1.setIcon(null);
                         button1.setBorder(null);
-                        button1.setBackground(new java.awt.Color(137, 72, 0));
+                        button1.setBackground(button1.getBackground());
                         button2.setIcon(icon);
                         button2.setBorder(null);
-                        button2.setBackground(new java.awt.Color(137, 72, 0));
+                        button2.setBackground(button2.getBackground());
 
                     }
                         //JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getIcon());
-                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getX());
-                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getY());
+                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getX()/(int) 64);
+                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getY()/(int) 64);
+                        //JOptionPane.showMessageDialog(null," " + chessBoardSquares[row][col].getLocation().y/(int) 64);
+                    //break label2;
                     }
                 }
             }
