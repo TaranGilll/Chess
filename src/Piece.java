@@ -76,12 +76,13 @@ public abstract class Piece extends Board
 
     //determine if the piece can make a legal move
     //pieces cannot move if they compromise a check!! - ADD ALL
-    public static boolean canMove(JButton button, int x1, int x2, int y1, int y2)
+    public static boolean canMove(JButton button)
     {
         //if piece on the end Square is the same color as the current
-        if (button.getIcon() != null )
-            return false;
-        return true;
+        if(button.getIcon() == null) {
+            return true;
+        }
+        return false;
     }
 
     public double getX()
