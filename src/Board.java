@@ -203,8 +203,8 @@ public class Board implements ActionListener {
 
                     }
                         //JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getIcon());
-                        //JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getX());
-                        //JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getY());
+                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getX());
+                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getY());
                     }
                 }
             }
