@@ -151,107 +151,49 @@ public class Board implements ActionListener {
         // To determine if piece is on board (.getIcon(null) == then proceed otherwise you don't)
         // White piece and you press on a black piece proceed (.getIcon(blackKing)
 
-        String description = "";
-        String color = "";
-        String piece = "";
-        JButton button1 = null;
-        JButton button2 = null;
+        JButton button1 = new JButton();
 
         // FIRST LOOP - first button is clicked
-        label:
-        for (int row = 0; row < chessBoardSquares.length; row ++) {
-            for(int col = 0; col <chessBoardSquares[row].length; col ++) {
-                if(e.getSource() == chessBoardSquares[row][col]) {
-                    button1 = null;
-                    button1 = chessBoardSquares[row][col];
-                    if(button1.getIcon() != null)
-                        description = ((ImageIcon) button1.getIcon()).getDescription();
-                    JOptionPane.showMessageDialog(null, "first button");
-                    if (description.lastIndexOf("Pawn") != -1 && description.contains("white")) {
-                        color = "white";
-                        piece = "pawn";
+        for (int row = 0; row < chessBoardSquares.length; row++) {
+            for (int col = 0; col < chessBoardSquares[row].length; col++) {
+                boolean flag = false;
+                if(!flag) {
+                    if (e.getSource() == chessBoardSquares[row][col]) {
+                        button1 = chessBoardSquares[row][col];
+                        flag = true;
+                        JOptionPane.showMessageDialog(null, "first step done");
                     }
-                    System.out.println("Works");
-                    break label;
                 }
             }
         }
 
         // SECOND LOOP
-        try
-        {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
-
-        //label2;
         for (int row = 0; row < chessBoardSquares.length; row++) {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
-                if (e.getSource() == chessBoardSquares[row][col]) {
-                    button2 = chessBoardSquares[row][col];
-                    JOptionPane.showMessageDialog(null, "second button");
-                    System.out.println(chessBoardSquares[row][col].getIcon());
-                    System.out.println(Piece.canMove(button2));
-                    if (Piece.canMove(button2)) {
-                        //If Button2 has no icon on it
-                        ImageIcon icon = (ImageIcon) button1.getIcon();
-                        //ImageIcon whitePawn = new ImageIcon(getClass().getResource("whitePawn.png"));
-                        button1.setIcon(null);
-                        button1.setBorder(null);
-                        button1.setBackground(button1.getBackground());
-                        button2.setIcon(icon);
-                        button2.setBorder(null);
-                        button2.setBackground(button2.getBackground());
-
-                    }
-                        //JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getIcon());
-                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getX()/(int) 64);
-                        JOptionPane.showMessageDialog(null, " " + chessBoardSquares[row][col].getY()/(int) 64);
-                        //JOptionPane.showMessageDialog(null," " + chessBoardSquares[row][col].getLocation().y/(int) 64);
-                    //break label2;
-                    }
+                final boolean[] flag = {false};
+                if(!flag[0]) {
+                    JButton finalButton = button1;
+                    int finalRow = row;
+                    int finalCol = col;
+                    chessBoardSquares[row][col].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            JButton button2 = chessBoardSquares[finalRow][finalCol];
+                            ImageIcon icon = (ImageIcon) finalButton.getIcon();
+                            finalButton.setIcon(null);
+                            finalButton.setBorder(null);
+                            finalButton.setBackground(finalButton.getBackground());
+                            button2.setIcon(icon);
+                            button2.setBorder(null);
+                            button2.setBackground(button2.getBackground());
+                            flag[0] = true;
+                            JOptionPane.showMessageDialog(null, "second step done");
+                        }
+                    });
                 }
             }
         }
-
-        /*boolean condition = Piece.canMove(button2, initRow, initCol, initRow2, initRow2);
-        if (condition) {
-            //button.setIcon(null);
-            //button.setBorder(null);
-            //button.setBackground(new java.awt.Color(137, 72, 0));
-            //button2.setIcon(button.getIcon());
-            //button2.setBorder(null);
-            //button2.setBackground(new java.awt.Color(137, 72, 0));
-        }*/
-
-            /*chessBoardSquares[2][0].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
-                    chessBoardSquares[1][0].setIcon(null);
-                    chessBoardSquares[1][0].setBorder(null);
-                    chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
-                    chessBoardSquares[2][0].setIcon(icon);
-                    chessBoardSquares[2][0].setBorder(null);
-                    chessBoardSquares[2][0].setBackground(new java.awt.Color(255, 206, 110));
-                }
-            });
-            chessBoardSquares[3][0].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    ImageIcon icon = (ImageIcon) chessBoardSquares[1][0].getIcon();
-                    chessBoardSquares[1][0].setIcon(null);
-                    chessBoardSquares[1][0].setBorder(null);
-                    chessBoardSquares[1][0].setBackground(new java.awt.Color(137, 72, 0));
-                    chessBoardSquares[3][0].setIcon(icon);
-                    chessBoardSquares[3][0].setBorder(null);
-                    chessBoardSquares[3][0].setBackground(new java.awt.Color(137, 72, 0));
-                }
-            });
-        }*/
+    }
 
     public static void main(String[] args) {
         frame = new JFrame("Board");
