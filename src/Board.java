@@ -2,16 +2,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.util.List;
 
 
 public class Board implements ActionListener {
     // Declaring Instance Variables
     private static JFrame frame;
     private JPanel chessBoard = new JPanel(new GridLayout(0, 8));
-    protected JButton[][] chessBoardSquares = new JButton[8][8];
+    protected static JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton chessSquare;
     private static final String [] pieceNames = {"rook", "knight", "bishop", "queen", "king", "pawn"};
+    private static String des;
     
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
@@ -145,8 +145,8 @@ public class Board implements ActionListener {
             }
         }
     }
-    /*
-    public void actionPerformed(ActionEvent e) {
+
+    /*public void actionPerformed(ActionEvent e) {
         // To determine if piece is on board (.getIcon(null) == then proceed otherwise you don't)
         // White piece and you press on a black piece proceed (.getIcon(blackKing)
 
@@ -158,6 +158,9 @@ public class Board implements ActionListener {
                 if (e.getSource() == chessBoardSquares[row][col]) {
                     button1 = chessBoardSquares[row][col];
                     JOptionPane.showMessageDialog(null, "first step done");
+                    System.out.println(Board.getType(chessBoardSquares[row][col]));
+                    JOptionPane.showMessageDialog(null, ((ImageIcon)chessBoardSquares[row][col].getIcon()).getDescription());
+
                 }
             }
         }
@@ -185,12 +188,38 @@ public class Board implements ActionListener {
                     });
             }
         }
+    }*/
+
+    // HELPER METHODS
+    public static String getDescription(JButton initButton) {
+        des = ((ImageIcon)initButton.getIcon()).getDescription();
+        return des;
     }
-     */
+    public static String getType(JButton initButton) {
+        Board.getDescription(initButton);
+        String a = "King";
+        String b = "Rook";
+        String c = "Bishop";
+        String d = "Queen";
+        String e = "Knight";
+        String f = "Pawn";
+
+        if(des.contains(a)) return a;
+        if(des.contains(b)) return b;
+        if(des.contains(c)) return c;
+        if(des.contains(d)) return d;
+        if(des.contains(e)) return e;
+        else return f;
+    }
+    public static boolean isWhite(JButton initButton) {
+        if(des.contains("white")) return true;
+        return false;
+    }
 
     JButton button1 = null;
     JButton button2 = null;
     int counter = 0;
+
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         JButton clicked = null;
@@ -198,12 +227,13 @@ public class Board implements ActionListener {
         OUTER:
         for (int row = 0; row < chessBoardSquares.length; row++) {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
-                if (source == chessBoardSquares[row][col])
+                if (source == chessBoardSquares[row][col]) {
 
-                    //DO NOT DELETE THESE 3 lines
-                    des = ((ImageIcon)chessBoardSquares[row][col].getIcon()).getDescription();
-                    System.out.println(des);
-                    //clicked = chessBoardSquares[row][col;
+                    String type = Board.getType(chessBoardSquares[row][col]);
+                    Boolean isWhite = Board.isWhite(chessBoardSquares[row][col]);
+                    System.out.println(Board.getType(chessBoardSquares[row][col]));
+                    System.out.println(Board.isWhite(chessBoardSquares[row][col]));
+
                     clicked = (JButton) source;
 
                     if (counter == 0) {
@@ -211,8 +241,7 @@ public class Board implements ActionListener {
                         JOptionPane.showMessageDialog(null, " " + "first step done");
                         counter++;
                         return;
-                    }
-                    else if (counter == 1) {
+                    } else if (counter == 1) {
                         button2 = clicked;
                         JOptionPane.showMessageDialog(null, " " + "second step done");
                         counter++;
@@ -220,23 +249,15 @@ public class Board implements ActionListener {
                     if (counter > 1)
                         counter = 0;
                     break OUTER;
+                }
             }
         }
-        String string = null;
-        if (des.contains("bishop"))
-            string = "bishop";
-        //This will be in a seperate class, just for testing purposes.
-        move(button1, button2, string);
     }
 
-    public void move(JButton button1, JButton button2, String string)
+    public void move(JButton button1, JButton button2)
     {
 
-        Piece piece = null;
-        if (toString().equalsIgnoreCase("bishop"))
-            piece = new Bishop(true);
-        else
-            piece = new Pawn(true);
+        Piece piece = new Bishop(true);
 
         //determine button coordinates on the board
         int startX = button1.getX() / (int) 64;
