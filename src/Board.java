@@ -6,13 +6,12 @@ import java.util.List;
 
 
 public class Board implements ActionListener {
-    // Declaring Variables
+    // Declaring Instance Variables
     private static JFrame frame;
     private JPanel chessBoard = new JPanel(new GridLayout(0, 8));
     protected JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton chessSquare;
-    private List<String> pieceNames;
-    private JButton button3;
+    private static final String [] pieceNames = {"rook", "knight", "bishop", "queen", "king", "pawn"};
     
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
@@ -24,14 +23,16 @@ public class Board implements ActionListener {
                 chessSquare.setMargin(chessSquaresMargin);
                 chessSquare.setPreferredSize(new Dimension(64, 64));
                 chessSquare.setBorder(null);
-                if ((col % 2 == 1 && row % 2 == 1) || (col % 2 == 0 && row % 2 == 0)) {
+                if ((row + col) % 2 == 0) {
                     chessSquare.setBackground(new java.awt.Color(255, 206, 110));
                     chessSquare.setOpaque(true);
                 } else {
                     chessSquare.setBackground(new java.awt.Color(137, 72, 0));
                     chessSquare.setOpaque(true);
                 }
+                //add button to chessSquare
                 chessBoardSquares[row][col] = chessSquare;
+                //add chessSquare to the chessBoard (panel)
                 chessBoard.add(chessBoardSquares[row][col]);
             }
         }
@@ -144,25 +145,19 @@ public class Board implements ActionListener {
             }
         }
     }
-
+    /*
     public void actionPerformed(ActionEvent e) {
-        // Public variables or protected so Piece class can access them (initRow1 == first coordinate person enters)
-        // Another for loop to find what other button was clicked (initRow2 == second coordinate person enteres)
         // To determine if piece is on board (.getIcon(null) == then proceed otherwise you don't)
         // White piece and you press on a black piece proceed (.getIcon(blackKing)
 
         JButton button1 = new JButton();
 
-        // FIRST LOOP - first button is clicked
+        // FIRST LOOP
         for (int row = 0; row < chessBoardSquares.length; row++) {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
-                boolean flag = false;
-                if(!flag) {
-                    if (e.getSource() == chessBoardSquares[row][col]) {
-                        button1 = chessBoardSquares[row][col];
-                        flag = true;
-                        JOptionPane.showMessageDialog(null, "first step done");
-                    }
+                if (e.getSource() == chessBoardSquares[row][col]) {
+                    button1 = chessBoardSquares[row][col];
+                    JOptionPane.showMessageDialog(null, "first step done");
                 }
             }
         }
@@ -170,14 +165,13 @@ public class Board implements ActionListener {
         // SECOND LOOP
         for (int row = 0; row < chessBoardSquares.length; row++) {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
-                final boolean[] flag = {false};
-                if(!flag[0]) {
                     JButton finalButton = button1;
                     int finalRow = row;
                     int finalCol = col;
                     chessBoardSquares[row][col].addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+                            System.out.println("Array");
                             JButton button2 = chessBoardSquares[finalRow][finalCol];
                             ImageIcon icon = (ImageIcon) finalButton.getIcon();
                             finalButton.setIcon(null);
@@ -186,14 +180,83 @@ public class Board implements ActionListener {
                             button2.setIcon(icon);
                             button2.setBorder(null);
                             button2.setBackground(button2.getBackground());
-                            flag[0] = true;
                             JOptionPane.showMessageDialog(null, "second step done");
                         }
                     });
-                }
             }
         }
     }
+     */
+
+    JButton button1 = null;
+    JButton button2 = null;
+    int counter = 0;
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        JButton clicked = null;
+        String des = "";
+        OUTER:
+        for (int row = 0; row < chessBoardSquares.length; row++) {
+            for (int col = 0; col < chessBoardSquares[row].length; col++) {
+                if (source == chessBoardSquares[row][col])
+
+                    //DO NOT DELETE THESE 3 lines
+                    des = ((ImageIcon)chessBoardSquares[row][col].getIcon()).getDescription();
+                    System.out.println(des);
+                    //clicked = chessBoardSquares[row][col;
+                    clicked = (JButton) source;
+
+                    if (counter == 0) {
+                        button1 = clicked;
+                        JOptionPane.showMessageDialog(null, " " + "first step done");
+                        counter++;
+                        return;
+                    }
+                    else if (counter == 1) {
+                        button2 = clicked;
+                        JOptionPane.showMessageDialog(null, " " + "second step done");
+                        counter++;
+                    }
+                    if (counter > 1)
+                        counter = 0;
+                    break OUTER;
+            }
+        }
+        String string = null;
+        if (des.contains("bishop"))
+            string = "bishop";
+        //This will be in a seperate class, just for testing purposes.
+        move(button1, button2, string);
+    }
+
+    public void move(JButton button1, JButton button2, String string)
+    {
+
+        Piece piece = null;
+        if (toString().equalsIgnoreCase("bishop"))
+            piece = new Bishop(true);
+        else
+            piece = new Pawn(true);
+
+        //determine button coordinates on the board
+        int startX = button1.getX() / (int) 64;
+        int startY = button1.getY() / (int) 64;
+        int endX = button2.getX() / (int) 64;
+        int endY = button2.getY() / (int) 64;
+
+        System.out.println(piece.canMove(button1, button2, chessBoardSquares));
+
+        if (piece.canMove(button1, button2, chessBoardSquares)) {
+            button2.setIcon(button1.getIcon());
+            button2.setBorder(null);
+            button2.setBackground(button2.getBackground());
+            button1.setIcon(null);
+            button1.setBorder(null);
+            button1.setBackground(button1.getBackground());
+        }
+    }
+
+    public JComponent getChessBoard() { return chessBoard; }
 
     public static void main(String[] args) {
         frame = new JFrame("Board");
@@ -203,4 +266,14 @@ public class Board implements ActionListener {
         frame.pack();
     }
 }
+
+
+// TO FIX
+//for (String piece : pieceNames)
+//determining which piece it is and creating that piece object
+//determining color for true and false in constructor
+//squares with icons vs squares with pieces (adding piece objects and reffering from that??)
+    //easier to manipulate to get piece color and stuff instead of icon.description.contains
+    //using Java objects instead of just text...better OOP
+    //((ImageIcon)button2.getIcon()).getDescription().contains("white")) always gives errors...very bad technique
 

@@ -1,57 +1,68 @@
-/*public class Bishop extends Piece
+import javax.swing.*;
+import static java.lang.StrictMath.abs;
+
+public class Bishop extends Piece
 {
-    public Bishop (boolean whiteColor)
-    {
-        super(whiteColor);
+    public Bishop(boolean isWhite) {
+        super(isWhite);
     }
 
     @Override
-    public boolean canMove(Board2 board2, Square start, Square end)
+    public boolean canMove(JButton button1, JButton button2, JButton[][] squares)
     {
-        if (!super.canMove(board2, start, end))
+        //if piece on the end Square is the same color as the current
+        if(!super.canMove(button1, button2, squares))
             return false;
 
+
+        //determine button coordinates on the board
+        int startX = button1.getX() / (int) 64;
+        int startY = button1.getY() / (int) 64;
+        int endX = button2.getX() / (int) 64;
+        int endY = button2.getY() / (int) 64;
+
         //ensure bishop moves legally
-        if (Math.abs(start.getX() - end.getX()) != Math.abs(start.getY() - end.getY()))
+        if (abs(startX - endX) != abs(startY - endY))
             return false;
 
         //determine direction of movement
         String direction = "";
-        if (start.getX() > end.getX() && start.getY() > end.getY())
+        if (startX > endX && startY > endY)
             direction = "nw";
-        else if (start.getX() > end.getX() && start.getY() < end.getY())
+        else if (startX > endX && startY < endY)
             direction = "sw";
-        else if (start.getX() < end.getX() && start.getY() > end.getY())
+        else if (startX < endX && startY > endY)
             direction = "ne";
         else
             direction = "se";
 
         //make sure no pieces are being "jumped" in the direction of movement
-        int spaces = Math.abs(start.getY() - end.getY());
-        for(int i = 1; i < spaces; i++)
+        int spaces = abs(startX - endX);
+        for (int i = 0; i < spaces; i++)
         {
             if (direction.equals("nw"))
             {
-                if (board2.getBoard()[start.getY() - i][start.getX() - i].getPiece() != null)
+                if (squares[startY - i][startX - i].getIcon() != null)
                     return false;
             }
             else if (direction.equals("sw"))
             {
-                if (board2.getBoard()[start.getY() + i][start.getX() - i].getPiece() != null)
+                if (squares[startY + i][startX - i].getIcon() != null)
                     return false;
             }
             else if (direction.equals("ne"))
             {
-                if (board2.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
+                if (squares[startY - i][startX + i].getIcon() != null)
                     return false;
             }
             else if (direction.equals("se"))
             {
-                if (board2.getBoard()[start.getY() + i][start.getX() + i].getPiece() != null)
+                if (squares[startY + i][startX + i].getIcon() != null)
                     return false;
             }
         }
+
         return true;
     }
 }
- */
+

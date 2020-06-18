@@ -1,9 +1,15 @@
+import javax.swing.*;
 /*
 public class Move extends Board {
-    public static void main(String[] args) {
-        Move test = new Move();
-        Piece newPiece = new Pawn(true);
-        //newPiece.getLocation();
+
+    private JButton button1;
+    private JButton button2;
+
+    public Move(JButton button, int type) {
+        if (type == 0)
+            button1 = button;
+        else
+            button2 = button;
     }
 }
  */

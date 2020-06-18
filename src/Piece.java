@@ -29,12 +29,21 @@ public abstract class Piece {
 
     //determine if the piece can make a legal move
     //pieces cannot move if they compromise a check!! - ADD ALL
-    public static boolean canMove(JButton button) {
-        //if piece on the end Square is the same color as the current
-        /*if(button.getIcon() != null && ((ImageIcon)button.getIcon).getDescription().contains("white") ) {
-            return false;
+    //static or not
+    public boolean canMove(JButton button1, JButton button2, JButton[][] squares)
+    {
+        String des1 = "";
+        String des2 = "";
+        if (button1.getIcon() != null)
+            des1 = ((ImageIcon)button1.getIcon()).getDescription();
+        if (button2.getIcon() != null) {
+            des2 = ((ImageIcon) button2.getIcon()).getDescription();
         }
-         */
+
+        if ( (des1.contains("white") && des2.contains("white")) || (des1.contains("black") && des2.contains("black")) )
+            return false;
+
         return true;
     }
+
 }
