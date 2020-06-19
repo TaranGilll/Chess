@@ -4,8 +4,8 @@ import static java.lang.StrictMath.abs;
 public class Pawn extends Piece
 {
 
-    public Pawn(boolean isWhite) {
-        super(isWhite);
+    public Pawn(String des) {
+        super(des);
     }
 
     @Override

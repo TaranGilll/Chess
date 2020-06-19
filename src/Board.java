@@ -192,11 +192,10 @@ public class Board implements ActionListener {
 
     // HELPER METHODS
     public static String getDescription(JButton initButton) {
-        des = ((ImageIcon)initButton.getIcon()).getDescription();
-        return des;
+        return ((ImageIcon)initButton.getIcon()).getDescription();
     }
     public static String getType(JButton initButton) {
-        Board.getDescription(initButton);
+        des = Board.getDescription(initButton);
         String a = "King";
         String b = "Rook";
         String c = "Bishop";
@@ -211,8 +210,11 @@ public class Board implements ActionListener {
         if(des.contains(e)) return e;
         else return f;
     }
+
+    //may not need
     public static boolean isWhite(JButton initButton) {
-        if(des.contains("white")) return true;
+        String des2 = des;
+        if(des2.indexOf("white") != -1) return true;
         return false;
     }
 
@@ -229,10 +231,12 @@ public class Board implements ActionListener {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
                 if (source == chessBoardSquares[row][col]) {
 
+                    /*
                     String type = Board.getType(chessBoardSquares[row][col]);
                     Boolean isWhite = Board.isWhite(chessBoardSquares[row][col]);
                     System.out.println(Board.getType(chessBoardSquares[row][col]));
                     System.out.println(Board.isWhite(chessBoardSquares[row][col]));
+                     */
 
                     clicked = (JButton) source;
 
@@ -252,18 +256,24 @@ public class Board implements ActionListener {
                 }
             }
         }
+        move(button1, button2);
     }
 
     public void move(JButton button1, JButton button2)
     {
+        Piece piece = null;
+        Boolean color = null;
 
-        Piece piece = new Bishop(true);
-
-        //determine button coordinates on the board
-        int startX = button1.getX() / (int) 64;
-        int startY = button1.getY() / (int) 64;
-        int endX = button2.getX() / (int) 64;
-        int endY = button2.getY() / (int) 64;
+        if (Board.getType(button1).equals("Pawn")) {
+            piece = new Pawn(des);
+            System.out.println("pawn being moved");
+            System.out.println(des);
+        }
+        else if (Board.getType(button1).equals("Bishop")) {
+            piece = new Bishop(des);
+            System.out.println("bishop being moved");
+            System.out.println(des);
+        }
 
         System.out.println(piece.canMove(button1, button2, chessBoardSquares));
 

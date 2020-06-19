@@ -3,8 +3,8 @@ import static java.lang.StrictMath.abs;
 
 public class Bishop extends Piece
 {
-    public Bishop(boolean isWhite) {
-        super(isWhite);
+    public Bishop(String des) {
+        super(des);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Bishop extends Piece
 
         //make sure no pieces are being "jumped" in the direction of movement
         int spaces = abs(startX - endX);
-        for (int i = 0; i < spaces; i++)
+        for (int i = 1; i < spaces; i++)
         {
             if (direction.equals("nw"))
             {
@@ -62,7 +62,7 @@ public class Bishop extends Piece
             }
         }
 
-        return true;//
+        return true;
     }
 }
 

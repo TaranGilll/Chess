@@ -7,8 +7,11 @@ public abstract class Piece {
     private boolean alive;
 
     //constructor - initializes the color of the piece and sets it to alive when the game begins
-    public Piece(boolean isWhite) {
-        white = isWhite;
+    public Piece(String des) {
+        if (des.contains("white"))
+            white = true;
+        else
+            white = false;
         alive = true;
     }
 
