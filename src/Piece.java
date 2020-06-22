@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Piece {
+public abstract class Piece extends Board {
     //instance variables
     private boolean white;
     private boolean alive;

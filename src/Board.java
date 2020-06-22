@@ -11,8 +11,8 @@ public class Board implements ActionListener {
     protected static JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton chessSquare;
     private static final String [] pieceNames = {"rook", "knight", "bishop", "queen", "king", "pawn"};
-    private static String des;
-    
+    public static String des;
+
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
         Insets chessSquaresMargin = new Insets(0,0,0,0);
@@ -192,10 +192,12 @@ public class Board implements ActionListener {
 
     // HELPER METHODS
     public static String getDescription(JButton initButton) {
-        return ((ImageIcon)initButton.getIcon()).getDescription();
+        ImageIcon icon = (ImageIcon)initButton.getIcon();
+        des = icon.getDescription();
+        return des;
     }
     public static String getType(JButton initButton) {
-        des = Board.getDescription(initButton);
+        Board.getDescription(initButton);
         String a = "King";
         String b = "Rook";
         String c = "Bishop";
@@ -213,8 +215,7 @@ public class Board implements ActionListener {
 
     //may not need
     public static boolean isWhite(JButton initButton) {
-        String des2 = des;
-        if(des2.indexOf("white") != -1) return true;
+        if (des.contains("white")) return true;
         return false;
     }
 
@@ -226,6 +227,7 @@ public class Board implements ActionListener {
         Object source = e.getSource();
         JButton clicked = null;
         String des = "";
+
         OUTER:
         for (int row = 0; row < chessBoardSquares.length; row++) {
             for (int col = 0; col < chessBoardSquares[row].length; col++) {
@@ -242,11 +244,13 @@ public class Board implements ActionListener {
 
                     if (counter == 0) {
                         button1 = clicked;
+                        System.out.println("click1");
                         JOptionPane.showMessageDialog(null, " " + "first step done");
                         counter++;
                         return;
                     } else if (counter == 1) {
                         button2 = clicked;
+                        System.out.println("click2");
                         JOptionPane.showMessageDialog(null, " " + "second step done");
                         counter++;
                     }
@@ -262,21 +266,38 @@ public class Board implements ActionListener {
     public void move(JButton button1, JButton button2)
     {
         Piece piece = null;
-        Boolean color = null;
 
+        //determine the piece
         if (Board.getType(button1).equals("Pawn")) {
             piece = new Pawn(des);
             System.out.println("pawn being moved");
-            System.out.println(des);
+        }
+        else if (Board.getType(button1).equals("Rook")) {
+            piece = new Rook(des);
+            System.out.println("rook being moved");
+        }
+        else if (Board.getType(button1).equals("Knight")) {
+            piece = new Knight(des);
+            System.out.println("knight being moved");
         }
         else if (Board.getType(button1).equals("Bishop")) {
             piece = new Bishop(des);
             System.out.println("bishop being moved");
-            System.out.println(des);
+        }
+        else if (Board.getType(button1).equals("Queen")) {
+            piece = new Queen(des);
+            System.out.println("queen being moved");
+        }
+        else if (Board.getType(button1).equals("King")) {
+            piece = new King(des);
+            System.out.println("king being moved");
         }
 
+        //print
+        System.out.println(des);
         System.out.println(piece.canMove(button1, button2, chessBoardSquares));
 
+        //execute move
         if (piece.canMove(button1, button2, chessBoardSquares)) {
             button2.setIcon(button1.getIcon());
             button2.setBorder(null);
@@ -300,11 +321,10 @@ public class Board implements ActionListener {
 
 
 // TO FIX
-//for (String piece : pieceNames)
-//determining which piece it is and creating that piece object
-//determining color for true and false in constructor
+//determining color for piece on button2 if any (can do this. for button1, but 2 requires method in this class
 //squares with icons vs squares with pieces (adding piece objects and reffering from that??)
     //easier to manipulate to get piece color and stuff instead of icon.description.contains
     //using Java objects instead of just text...better OOP
     //((ImageIcon)button2.getIcon()).getDescription().contains("white")) always gives errors...very bad technique
+
 

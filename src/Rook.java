@@ -1,74 +1,68 @@
-/*public class Rook extends Piece
+import javax.swing.*;
+import static java.lang.StrictMath.abs;
+
+public class Rook extends Piece
 {
 
-    public Rook (boolean whiteColor)
-    {
-        super(whiteColor);
+    public Rook(String des) {
+        super(des);
     }
 
     @Override
-    public boolean canMove(Board2 board2, Square start, Square end) {
+    public boolean canMove(JButton button1, JButton button2, JButton[][] squares)
+    {
 
-        if (!super.canMove(board2, start, end))
+        //if piece on the end Square is the same color as the current
+        if (!super.canMove(button1, button2, squares))
             return false;
 
+        //determine button coordinates on the board
+        int startX = button1.getX() / 64;
+        int startY = button1.getY() / 64;
+        int endX = button2.getX() / 64;
+        int endY = button2.getY() / 64;
+
         //ensure rook moves legally (only in a straight line)
-        if (start.getX() != end.getX() && start.getY() != end.getY())
+        if (startX != endX && startY != endY)
             return false;
 
         //determine the direction of movement
         String direction = "";
-        if (start.getX() < end.getX())
+        if (startX < endX)
             direction = "east";
-        else if (start.getX() > end.getX())
+        else if (startX > endX)
             direction = "west";
-        else if (start.getY() > end.getY())
-            direction = "north";
-        else if (start.getY() < end.getY())
+        else if (startY > endY)
             direction = "south";
+        else if (startY < endY)
+            direction = "north";
 
-        //make sure rook doesn't jump over any pieces depending on direction of movement
-        if (direction.endsWith("st"))
+        //make sure rook doesn't jump over any pieces in its path
+        int spaces = abs(startX - endX);
+        for (int i = 1; i < spaces; i++)
         {
             if (direction.equals("east"))
             {
-                for (int i = start.getX() + 1; i < end.getX(); i++)
-                {
-                    if (board2.getBoard()[start.getY()][i].getPiece() != null)
-                        return false;
-                }
+                if (squares[startY][startX + i].getIcon() != null)
+                    return false;
             }
-            else
-                {
-                for (int i = start.getX() - 1; i > end.getX(); i--)
-                {
-                    if (board2.getBoard()[start.getY()][i].getPiece() != null)
-                        return false;
-                }
-            }
-        }
-        else if (direction.endsWith("th"))
-        {
-            if (direction.equals("south"))
+            else if (direction.equals("west"))
             {
-                for (int i = start.getY() + 1; i < end.getY(); i++)
-                {
-                    if (board2.getBoard()[i][start.getX()].getPiece() != null)
-                        return false;
-                }
+                if (squares[startY][startX - i].getIcon() != null)
+                    return false;
             }
-            else
+            else if (direction.equals("south"))
             {
-                // CHECK - no (>=)
-                for (int i = start.getY() - 1; i > end.getY(); i--)
-                {
-                    if (board2.getBoard()[i][start.getX()].getPiece() != null)
-                        return false;
-                }
+                if (squares[startY + i][startX].getIcon() != null)
+                    return false;
+            }
+            else if (direction.equals("north"))
+            {
+                if (squares[startY - i][startX].getIcon() != null)
+                    return false;
             }
         }
 
         return true;
     }
 }
-*/

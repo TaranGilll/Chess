@@ -11,6 +11,20 @@ public class Pawn extends Piece
     @Override
     public boolean canMove(JButton button1, JButton button2, JButton[][] squares)
     {
+        //if piece on the end Square is the same color as the current
+        if(!super.canMove(button1, button2, squares))
+            return false;
+
+        //determine button coordinates on the board
+        int startX = button1.getX() / 64;
+        int startY = button1.getY() / 64;
+        int endX = button2.getX() / 64;
+        int endY = button2.getY() / 64;
+
+        //Ensure legal movement depending on current location
+        int x_direction = abs(startX - endX);
+        int y_direction = abs(startY - endY);
+
         return true;
     }
 }

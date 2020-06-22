@@ -16,10 +16,10 @@ public class Bishop extends Piece
 
 
         //determine button coordinates on the board
-        int startX = button1.getX() / (int) 64;
-        int startY = button1.getY() / (int) 64;
-        int endX = button2.getX() / (int) 64;
-        int endY = button2.getY() / (int) 64;
+        int startX = button1.getX() / 64;
+        int startY = button1.getY() / 64;
+        int endX = button2.getX() / 64;
+        int endY = button2.getY() / 64;
 
         //ensure bishop moves legally
         if (abs(startX - endX) != abs(startY - endY))
