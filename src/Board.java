@@ -12,6 +12,7 @@ public class Board implements ActionListener {
     private JButton button1 = null;
     private JButton button2 = null;
     private int counter = 0;
+    private int book = 1;
 
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
