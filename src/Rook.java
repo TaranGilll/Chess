@@ -32,9 +32,9 @@ public class Rook extends Piece
             direction = "east";
         else if (startX > endX)
             direction = "west";
-        else if (startY > endY)
-            direction = "south";
         else if (startY < endY)
+            direction = "south";
+        else if (startY > endY)
             direction = "north";
 
         //make sure rook doesn't jump over any pieces in its path
@@ -66,7 +66,6 @@ public class Rook extends Piece
                 if (squares[startY - i][startX].getIcon() != null)
                     return false;
             }
-            //
         }
 
         return true;
