@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 public abstract class Piece {
     //instance variables
@@ -21,9 +20,7 @@ public abstract class Piece {
     }
 
     //determine the color of the piece: white or black
-    public boolean isWhite() {
-        return white;
-    }
+    public boolean isWhite() { return white;}
 
     //change the status of the piece depending on how the game progresses
     public void setStatus(boolean status) {

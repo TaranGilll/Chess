@@ -24,6 +24,6 @@ public class Knight extends Piece
         int x_direction = abs(startX - endX);
         int y_direction = abs(startY - endY);
 
-        return (x_direction * y_direction == 2);//
+        return (x_direction * y_direction == 2);
     }
 }

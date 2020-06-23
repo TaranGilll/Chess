@@ -12,7 +12,6 @@ public class Board implements ActionListener {
     private JButton button1 = null;
     private JButton button2 = null;
     private int counter = 0;
-    private int book = 1;
 
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
@@ -159,6 +158,7 @@ public class Board implements ActionListener {
         else return f;
     }
     public static boolean isWhite(JButton initButton) {
+        des = ((ImageIcon)initButton.getIcon()).getDescription();
         if(des.contains("white")) return true;
         return false;
     }
@@ -186,8 +186,9 @@ public class Board implements ActionListener {
             }
         }
         Move.move(button1, button2);
+        ExcessMoves.main(button2);
     }
-
+    
     public static void main(String[] args) {
         frame = new JFrame("Board");
         frame.add(new Board().chessBoard);

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.IOException;
 
 public class Move extends Board {
 
