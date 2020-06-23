@@ -11,7 +11,7 @@ public class Board implements ActionListener {
     protected static JButton[][] chessBoardSquares = new JButton[8][8];
     private JButton chessSquare;
     private static final String [] pieceNames = {"rook", "knight", "bishop", "queen", "king", "pawn"};
-    public static String des;
+    private static String des;
 
     public Board() {
         // Insets specifies the space that must be left at each of the square edges.
@@ -146,54 +146,9 @@ public class Board implements ActionListener {
         }
     }
 
-    /*public void actionPerformed(ActionEvent e) {
-        // To determine if piece is on board (.getIcon(null) == then proceed otherwise you don't)
-        // White piece and you press on a black piece proceed (.getIcon(blackKing)
-
-        JButton button1 = new JButton();
-
-        // FIRST LOOP
-        for (int row = 0; row < chessBoardSquares.length; row++) {
-            for (int col = 0; col < chessBoardSquares[row].length; col++) {
-                if (e.getSource() == chessBoardSquares[row][col]) {
-                    button1 = chessBoardSquares[row][col];
-                    JOptionPane.showMessageDialog(null, "first step done");
-                    System.out.println(Board.getType(chessBoardSquares[row][col]));
-                    JOptionPane.showMessageDialog(null, ((ImageIcon)chessBoardSquares[row][col].getIcon()).getDescription());
-
-                }
-            }
-        }
-
-        // SECOND LOOP
-        for (int row = 0; row < chessBoardSquares.length; row++) {
-            for (int col = 0; col < chessBoardSquares[row].length; col++) {
-                    JButton finalButton = button1;
-                    int finalRow = row;
-                    int finalCol = col;
-                    chessBoardSquares[row][col].addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            System.out.println("Array");
-                            JButton button2 = chessBoardSquares[finalRow][finalCol];
-                            ImageIcon icon = (ImageIcon) finalButton.getIcon();
-                            finalButton.setIcon(null);
-                            finalButton.setBorder(null);
-                            finalButton.setBackground(finalButton.getBackground());
-                            button2.setIcon(icon);
-                            button2.setBorder(null);
-                            button2.setBackground(button2.getBackground());
-                            JOptionPane.showMessageDialog(null, "second step done");
-                        }
-                    });
-            }
-        }
-    }*/
-
     // HELPER METHODS
     public static String getDescription(JButton initButton) {
-        ImageIcon icon = (ImageIcon)initButton.getIcon();
-        des = icon.getDescription();
+        des = ((ImageIcon)initButton.getIcon()).getDescription();
         return des;
     }
     public static String getType(JButton initButton) {
@@ -306,6 +261,7 @@ public class Board implements ActionListener {
             button1.setBorder(null);
             button1.setBackground(button1.getBackground());
         }
+        des = "";
     }
 
     public JComponent getChessBoard() { return chessBoard; }
