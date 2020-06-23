@@ -25,7 +25,29 @@ public class Pawn extends Piece
         int x_direction = abs(startX - endX);
         int y_direction = abs(startY - endY);
 
+        if (x_direction == 1 && y_direction == 1)
+        {
+            if(this.isWhite() != Board.isWhite(button2) || button2.getIcon() == null)
+                return false;
+        }
 
+        //other illegal moves
+        if (x_direction != 0 || y_direction > 2)
+            return false;
+
+        else if (y_direction == 2)
+        {
+            if (this.isWhite() && startY == 1)
+            {
+                if(squares[startY + 1][startX].getIcon() != null)
+                    return false;
+            }
+            else if (!this.isWhite() && startY == 6)
+            {
+                if(squares[startY - 1][startX].getIcon() != null)
+                    return false;
+            }
+        }
 
         return true;
     }

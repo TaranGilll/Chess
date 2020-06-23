@@ -38,7 +38,12 @@ public class Rook extends Piece
             direction = "north";
 
         //make sure rook doesn't jump over any pieces in its path
-        int spaces = abs(startX - endX);
+        int spaces = 0;
+        if (direction.endsWith("st"))
+            spaces = abs(startX - endX);
+        else if (direction.endsWith("th"))
+            spaces = abs(startY - endY);
+
         for (int i = 1; i < spaces; i++)
         {
             if (direction.equals("east"))
