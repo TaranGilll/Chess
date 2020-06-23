@@ -66,6 +66,7 @@ public class Rook extends Piece
                 if (squares[startY - i][startX].getIcon() != null)
                     return false;
             }
+            //
         }
 
         return true;
