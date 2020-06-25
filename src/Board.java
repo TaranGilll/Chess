@@ -149,13 +149,15 @@ public class Board implements ActionListener {
         String d = "Queen";
         String e = "Knight";
         String f = "Pawn";
+        String g = "null";
 
         if(des.contains(a)) return a;
         if(des.contains(b)) return b;
         if(des.contains(c)) return c;
         if(des.contains(d)) return d;
         if(des.contains(e)) return e;
-        else return f;
+        if(des.contains(f)) return f;
+        else return g;
     }
     public static boolean isWhite(JButton initButton) {
         des = ((ImageIcon)initButton.getIcon()).getDescription();
@@ -175,8 +177,7 @@ public class Board implements ActionListener {
                         button1 = clicked;
                         counter++;
                         return;
-                    }
-                    else if (counter == 1) {
+                    } else if (counter == 1) {
                         button2 = clicked;
                         counter++;
                     }
@@ -187,6 +188,7 @@ public class Board implements ActionListener {
         }
         Move.move(button1, button2);
         ExcessMoves.main(button2);
+        //ExcessMoves.gameOver(chessBoardSquares); //Don't uncomment since we need to fix the null error first
     }
     
     public static void main(String[] args) {

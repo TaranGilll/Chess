@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.print.attribute.standard.JobPriority;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -11,6 +12,8 @@ public class ExcessMoves {
     private static JButton d = new JButton("Knight");
     private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     private static JButton button = null;
+    private static boolean flag1 = false;
+    private static boolean flag2 = false;
 
     // Creates GUI / determines if piece is on opponent's side
     public ExcessMoves(JButton initButton) {
@@ -95,6 +98,39 @@ public class ExcessMoves {
                 }
             }
         });
+    }
+
+    public static void gameOver(JButton[][] initChessBoard) {
+        // Searches for white king
+        for (int row = 0; row < initChessBoard.length; row++) {
+            for (int col = 0; col < initChessBoard[row].length; col++) {
+                if ((Board.getType(initChessBoard[row][col]).equals("King") && Board.isWhite(initChessBoard[row][col]))) {
+                    System.out.println("true");
+                    flag1 = true;
+                    JOptionPane.showMessageDialog(null, "TRUE");
+                } else {
+                    flag1 = false;
+                    break;
+                }
+            }
+        }
+        // Searches for black king
+        for (int row = 0; row < initChessBoard.length; row++) {
+            for (int col = 0; col < initChessBoard[row].length; col++) {
+                if ((Board.getType(initChessBoard[row][col]).equals("King") && !Board.isWhite(initChessBoard[row][col]))) {
+                    System.out.println("true");
+                    flag2 = true;
+                    JOptionPane.showMessageDialog(null, "TRUE2");
+                } else {
+                    flag2 = false;
+                    break;
+                }
+            }
+        }
+
+        if (flag1 == false || flag2 == false) {
+            JOptionPane.showMessageDialog(null, "GAME OVER");
+        }
     }
 
     public static void main(JButton button2) {
